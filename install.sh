@@ -30,5 +30,5 @@ for a in x86_64-windows i386-windows; do
   chmod u+w "$DST/files/lib/wine/$a/crypt32.dll"
   cp "$HERE/dlls/$a/crypt32.dll" "$DST/files/lib/wine/$a/crypt32.dll"
 done
-echo "$NEW" >> "$DST/version"
+sed -i "s/ .*/ $NEW/" "$DST/version"
 echo "Done. Restart Steam and select '$NEW' for Battle.net in Properties > Compatibility."
