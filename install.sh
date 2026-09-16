@@ -1,9 +1,22 @@
 #!/bin/bash
-# Creates a copy of an installed GE-Proton (default: GE-Proton11-6-x86_64) named <name>-wc3fix
-# with the patched crypt32.dll files from this repo. Restart Steam afterwards.
 set -e
-SRC_NAME="${1:-GE-Proton11-6-x86_64}"
-TOOLS="${STEAM_COMPAT_TOOLS:-$HOME/.steam/root/compatibilitytools.d}"
+
+# If flag is passed, target proton-plus default directory for use outside of steam (lutris, etc)
+PROTON_PLUS=0
+if [ "$1" = "--proton-plus" ]; then
+  PROTON_PLUS=1
+  shift
+fi
+
+if [ "$PROTON_PLUS" -eq 1 ]; then
+  SRC_NAME="${1:-GE-Proton11-6}"
+  DEFAULT_TOOLS="$HOME/.local/share/Steam/compatibilitytools.d"
+else
+  SRC_NAME="${1:-GE-Proton11-6-x86_64}"
+  DEFAULT_TOOLS="$HOME/.steam/root/compatibilitytools.d"
+fi
+
+TOOLS="${STEAM_COMPAT_TOOLS:-$DEFAULT_TOOLS}"
 SRC="$TOOLS/$SRC_NAME"
 DST="$TOOLS/${SRC_NAME%-x86_64}-wc3fix"
 HERE="$(cd "$(dirname "$0")" && pwd)"

@@ -17,6 +17,8 @@ Requires GE-Proton 11-6 already installed in `~/.steam/root/compatibilitytools.d
 git clone https://github.com/FerMPY/wc3-reforged-proton-fix
 cd wc3-reforged-proton-fix
 ./install.sh
+# or pass `--proton-plus` to target default proton plus directory
+./install.sh --proton-plus
 ```
 
 Then restart Steam, open Battle.net Launcher.exe → Properties → Compatibility, and select
